@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8127339f-888b-4b84-b823-5db4f29dda67" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="/usr/lib/go" />
+  <component name="ProjectId" id="1gbL2PwIoxlom3W07FHirjEBIfW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="go build TAAssistant" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="TAAssistant" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="TAAssistant" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build TAAssistant" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1814" height="142" key="GridCell.Tab.0.bottom" timestamp="1598547625159">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1260" height="194" key="GridCell.Tab.0.bottom/0.312.1366.768/1366.0.1920.1080@0.312.1366.768" timestamp="1598493282458" />
+    <state width="1814" height="194" key="GridCell.Tab.0.bottom/0.312.1366.768/1366.0.1920.1080@1366.0.1920.1080" timestamp="1598439992500" />
+    <state width="1814" height="142" key="GridCell.Tab.0.bottom/277.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598547625159" />
+    <state width="1814" height="142" key="GridCell.Tab.0.bottom/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598545944138" />
+    <state width="1814" height="142" key="GridCell.Tab.0.center" timestamp="1598547625159">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1260" height="194" key="GridCell.Tab.0.center/0.312.1366.768/1366.0.1920.1080@0.312.1366.768" timestamp="1598493282458" />
+    <state width="1814" height="194" key="GridCell.Tab.0.center/0.312.1366.768/1366.0.1920.1080@1366.0.1920.1080" timestamp="1598439992500" />
+    <state width="1814" height="142" key="GridCell.Tab.0.center/277.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598547625159" />
+    <state width="1814" height="142" key="GridCell.Tab.0.center/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598545944138" />
+    <state width="1814" height="142" key="GridCell.Tab.0.left" timestamp="1598547625159">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1260" height="194" key="GridCell.Tab.0.left/0.312.1366.768/1366.0.1920.1080@0.312.1366.768" timestamp="1598493282458" />
+    <state width="1814" height="194" key="GridCell.Tab.0.left/0.312.1366.768/1366.0.1920.1080@1366.0.1920.1080" timestamp="1598439992499" />
+    <state width="1814" height="142" key="GridCell.Tab.0.left/277.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598547625159" />
+    <state width="1814" height="142" key="GridCell.Tab.0.left/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598545944138" />
+    <state width="1814" height="142" key="GridCell.Tab.0.right" timestamp="1598547625159">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1260" height="194" key="GridCell.Tab.0.right/0.312.1366.768/1366.0.1920.1080@0.312.1366.768" timestamp="1598493282458" />
+    <state width="1814" height="194" key="GridCell.Tab.0.right/0.312.1366.768/1366.0.1920.1080@1366.0.1920.1080" timestamp="1598439992500" />
+    <state width="1814" height="142" key="GridCell.Tab.0.right/277.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598547625159" />
+    <state width="1814" height="142" key="GridCell.Tab.0.right/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598545944138" />
+    <state x="0" y="-384" width="762" height="667" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598536165333">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="0" y="77" width="762" height="667" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.312.1366.768/1366.0.1920.1080@0.312.1366.768" timestamp="1598486188346" />
+    <state x="0" y="-384" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598536165333" />
+    <state x="793" y="294" width="323" height="475" key="refactoring.ChangeSignatureDialog" timestamp="1598460783971">
+      <screen x="0" y="312" width="1366" height="768" />
+    </state>
+    <state x="793" y="294" width="323" height="475" key="refactoring.ChangeSignatureDialog/0.312.1366.768/1366.0.1920.1080@0.312.1366.768" timestamp="1598460783971" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1598542210547">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598542210547" />
+  </component>
+</project>
