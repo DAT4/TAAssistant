@@ -8,18 +8,19 @@ func (student student) fullName() string {
 	}
 }
 type student struct {
-	FirstName string
-	MiddleName string
-	LastName string
-	ID string
-	Role string
-	Discord string
+	FirstName string	`bson:"firstName"`
+	MiddleName string	`bson:"middleName"`
+	LastName string		`bson:"lastName"`
+	ID string			`bson:"id"`
+	Role string			`bson:"role"`
+	Discord string		`bson:"discord"`
 }
 
 type question struct {
-	Student student
-	Timestamp int64
-	Topic []string
-	Question string
-	Active bool
+	Student student		`bson:"student"`
+	ChannelID string	`bson:"channelId"`
+	Timestamp int64		`bson:"timestamp"`
+	Topic []string		`bson:"topic"`
+	Question string		`bson:"question"`
+	Active bool			`bson:"active"`
 }

@@ -14,6 +14,9 @@ import (
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	//Exclude messages from client
+	if m.Author.ID == "748621295092105336" {
+		return
+	}
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
@@ -55,7 +58,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 
-	if author.Role == "N/S"{
+	if author.Role == "TA"{
 		del, _ := regexp.MatchString(`##s\d{6}`,m.Content)
 		if del {
 			unRegisterStudent(s,m,c)
@@ -63,11 +66,51 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		//List questions
 		if strings.HasPrefix(m.Content, "list") {
-			roles, _ := s.GuildRoles(m.GuildID)
-			for _,e := range(roles){
-				fmt.Println(e.Name,"has ID", e.ID)
+			str := ""
+			questions := getQuestionList()
+			for _,e := range(questions){
+				str += "```\n"
+				str += "Emne:\t\t\t "
+				for _,a := range(e.Topic) {
+					str += a
+					str += ","
+				}
+				str += "\n"
+				str += "Navn:\t\t\t "
+				str += e.Student.FirstName +" "
+				if e.Student.MiddleName != ""{
+					str += e.Student.FirstName + " "
+				}
+				str += e.Student.LastName
+				str += "\n"
+				str += "Studienummer:\t "
+				str += e.Student.ID
+				str += "\n"
+				time := time.Unix(e.Timestamp,0)
+				day := time.Weekday().String()
+				minute := strconv.Itoa(time.Minute())
+				if time.Minute() < 10 {
+					minute = "0"+strconv.Itoa(time.Minute())
+				}
+				hour := strconv.Itoa(time.Hour())+":"+minute
+				str += "Dag:\t\t\t  "
+				str += day
+				str += "\n"
+				str += "Time:\t\t\t "
+				str += hour
+				str += "\n"
+				str += "Channel:\t\t  "
+				cha, err := s.Channel(e.ChannelID)
+				if err != nil {
+					str += "No channel"
+				} else {
+					str += cha.Name
+				}
+				str += "```"
+				str += "**Spørgsmål:**\n"
+				str += e.Question
 			}
-			_, _ = s.ChannelMessageSend(c.ID, m.Author.Mention()+" du får din liste når jeg er færdig med at udvikle den.")
+			_, _ = s.ChannelMessageSend(c.ID, str)
 			return
 		}
 

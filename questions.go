@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"strings"
 	"time"
@@ -27,10 +28,18 @@ func studentAsksQuestion(s *discordgo.Session, m *discordgo.MessageCreate, c *di
 
 	data := question{
 		Student:  *author,
+		ChannelID: m.ChannelID,
 		Timestamp: time.Now().Unix(),
 		Topic:    emner,
 		Question: strings.TrimSpace(q[1]),
 		Active: true,
+	}
+
+
+	err := writeQuestion(data)
+	if err != nil {
+		fmt.Println("Write question to MondoDB:",err)
+		return
 	}
 
 	s.ChannelMessageSend(c.ID, m.Author.Mention()+"```SPØRGSMÅL:\n\t" +
@@ -38,3 +47,4 @@ func studentAsksQuestion(s *discordgo.Session, m *discordgo.MessageCreate, c *di
 		"Emne: "+strings.Join(data.Topic,",")+"\n\t" +
 		"Text: "+data.Question+"```")
 }
+
