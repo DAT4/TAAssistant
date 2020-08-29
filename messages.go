@@ -18,7 +18,6 @@ func deleteMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-	go deleteMessage(s, m)
 	//Exclude messages from web bot
 	if m.Author.ID == "748621295092105336" {
 		return
@@ -33,6 +32,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.ChannelID != "749103315597394020" {
 		return
 	}
+	go deleteMessage(s, m)
 
 	//Identify channel
 	c, err := s.State.Channel(m.ChannelID)
