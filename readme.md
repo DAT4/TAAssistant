@@ -1,6 +1,6 @@
 # Registration bot
 
-Usecase: Register or unregister students to grant them permission to the discord channels.
+**Usecase:** Register or unregister students to grant them permission to the discord channels.
 
 ![UML diagram](UML/flow.png)
 
