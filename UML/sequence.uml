@@ -1,0 +1,23 @@
+@startuml
+title Student registration
+start
+:User sends message with studentID;
+if (Student already registerd) then (yes)
+    stop
+else (no)
+    if (id == regex(s\d{6}) then (yes)
+        if (id ocupied) then (yes)
+            :notify Student;
+            stop
+        else (no)
+            :write Students DiscordID to DB;
+            :grant Student access to channels;
+            :change Student nickname;
+            stop
+        endif
+    else (no)
+        :notify Student;
+    endif
+endif
+stop
+@enduml
