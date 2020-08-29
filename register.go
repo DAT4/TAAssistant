@@ -1,12 +1,9 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"github.com/bwmarrin/discordgo"
-	"go.mongodb.org/mongo-driver/bson"
 	"strings"
-	"time"
 )
 
 
@@ -29,18 +26,7 @@ func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discor
 
 
 	s.ChannelMessageSend(c.ID, "```Hejsa "+person.fullName()+"\nDu registreres og får nu adgang til diverse tekst og talekanaler!```")
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-
-	_, err = students.UpdateOne(ctx,
-		bson.M{"id":str},
-		bson.D{
-			{"$set", bson.M{"discord":m.Author.ID}},
-		},
-	)
-	if err != nil {
-		fmt.Println("Updating discord number:",err)
-		return
-	}
+	updateStudent(str, m.Author.ID)
 
 	// Changing name and adding student to Student role
 	if person.Role == "S"{
@@ -81,20 +67,13 @@ func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *disc
 		fmt.Println("Removing", user.Username, "from role Student:",err)
 		return
 	}
-	s.ChannelMessageSend(c.ID, "```"+stud.FirstName+" "+"fjernes fra discord bruger : "+user.Username+"```")
+	s.ChannelMessageSend(c.ID, "```"+stud.ID+" "+"fjernes fra discord bruger : "+user.Username+"```")
 
 	//Connectiong to MongoDB to Update
-	fmt.Println(str, "slettes")
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	_, err = students.UpdateOne(ctx,
-		bson.M{"id":str},
-		bson.D{
-			{"$set", bson.M{"discord":""}},
-		},
-	)
+	fmt.Println(str, "slettes.")
+	err = updateStudent(str,"")
 	if err != nil {
-		fmt.Println("Updating discord number:",err)
-		return
+		fmt.Println("Deleting student",str,":",err)
 	}
 	return
 }

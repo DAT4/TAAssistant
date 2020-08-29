@@ -10,7 +10,6 @@ import (
 
 var token = os.Getenv("DISCORD_TOKEN")
 func main() {
-	dbConnect()
 	discordConnect()
 }
 

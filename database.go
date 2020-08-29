@@ -10,65 +10,59 @@ import (
 	"time"
 )
 
-var students mongo.Collection
-var questions mongo.Collection
 var mongURI = os.Getenv("MONGO_URI")
 
-func dbConnect() {
+func updateStudent(id string, discordID string)(err error){
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongURI))
 
 	if err != nil {
-		fmt.Println("Connecting to database:",err)
+		return err
 	}
 
-	//defer client.Disconnect(ctx)
+	defer client.Disconnect(ctx)
+
 	database := client.Database("dtu")
-	students = *database.Collection("students")
-	questions = *database.Collection("questions")
-}
-
-func findStudent(id string, discord bool) (*student, error) {
-	ret := student{}
-	if discord{
-		ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-		err := students.FindOne(ctx, bson.M{"discord":id}).Decode(&ret)
-		if err != nil {
-			fmt.Println("Looking for student with id",id+":",err)
-			return nil , err
-		}
-	} else {
-		ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-		err := students.FindOne(ctx, bson.M{"id":id}).Decode(&ret)
-		if err != nil {
-			fmt.Println("Looking for student with id",id+":",err)
-			return nil, err
-		}
-	}
-	return &ret, nil
-}
-
-func writeQuestion(q question) error {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	_ , err := questions.InsertOne(ctx,q,)
+	students := database.Collection("students")
+	_, err = students.UpdateOne(ctx,
+		bson.M{"id":id},
+		bson.D{
+			{"$set", bson.M{"discord":discordID}},
+		},
+	)
 	if err != nil {
+		fmt.Println("Updating discord number:",err)
 		return err
 	}
 	return nil
 }
-
-func getQuestionList() (ret []question){
+func findStudent(id string, discord bool) (student *student, err error) {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	cursor , err := questions.Find(ctx, bson.M{"active":true})
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongURI))
 	if err != nil {
-		fmt.Println("Looking for quetions in MongoDB:",err)
-		return nil
+		fmt.Println("Could not connect to client:",err)
+		return nil, err
 	}
-	var q question
-	for cursor.Next(context.Background()){
-		cursor.Decode(&q)
-		ret = append(ret, q)
+
+	defer client.Disconnect(ctx)
+
+	students := client.Database("dtu").Collection("students")
+	//questions := *database.Collection("questions")
+
+	if discord{
+		ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+		err := students.FindOne(ctx, bson.M{"discord":id}).Decode(&student)
+		if err != nil {
+			return nil , err
+		}
+	} else {
+		ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+		err := students.FindOne(ctx, bson.M{"id":id}).Decode(&student)
+		if err != nil {
+			return nil, err
+		}
 	}
-	return ret
+
+	return student , nil
 }
 

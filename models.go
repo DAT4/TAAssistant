@@ -7,6 +7,7 @@ func (student student) fullName() string {
 		return student.FirstName+" "+student.LastName
 	}
 }
+
 type student struct {
 	FirstName string	`bson:"firstName"`
 	MiddleName string	`bson:"middleName"`
@@ -16,11 +17,4 @@ type student struct {
 	Discord string		`bson:"discord"`
 }
 
-type question struct {
-	Student student		`bson:"student"`
-	ChannelID string	`bson:"channelId"`
-	Timestamp int64		`bson:"timestamp"`
-	Topic []string		`bson:"topic"`
-	Question string		`bson:"question"`
-	Active bool			`bson:"active"`
-}
+
