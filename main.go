@@ -9,11 +9,12 @@ import (
 )
 
 var token = os.Getenv("DISCORD_TOKEN")
+
 func main() {
 	discordConnect()
 }
 
-func discordConnect(){
+func discordConnect() {
 	discord, err := discordgo.New("Bot " + token)
 	if err != nil {
 		fmt.Println("Connect to the bot", err)
@@ -33,8 +34,6 @@ func discordConnect(){
 	discord.Close()
 }
 
-
-func ready(s *discordgo.Session, even *discordgo.Ready){
-	s.UpdateStatus(0,"Tower of Hanoi")
+func ready(s *discordgo.Session, even *discordgo.Ready) {
+	s.UpdateStatus(0, "Tower of Hanoi")
 }
-

@@ -8,17 +8,17 @@ import (
 	"time"
 )
 
-func deleteMessage(s *discordgo.Session, m *discordgo.MessageCreate){
-	time.Sleep(5*time.Second)
-	err := s.ChannelMessageDelete(m.ChannelID,m.ID)
+func deleteMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
+	time.Sleep(5 * time.Second)
+	err := s.ChannelMessageDelete(m.ChannelID, m.ID)
 	if err != nil {
-		fmt.Println("Deleting message:",err)
+		fmt.Println("Deleting message:", err)
 	}
 	return
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-	go deleteMessage(s,m)
+	go deleteMessage(s, m)
 	//Exclude messages from web bot
 	if m.Author.ID == "748621295092105336" {
 		return
@@ -46,28 +46,28 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		fmt.Println("Trying to identify user", err)
 
 		//Register member
-		register, err := regexp.MatchString(`s\d{6}`,strings.ToLower(m.Content))
+		register, err := regexp.MatchString(`s\d{6}`, strings.ToLower(m.Content))
 		if err != nil {
 			s.ChannelMessageSend(c.ID, "Velkommen "+m.Author.Username+", Vil du venligst identificere dig selv med dit studienummer.\n**Eksempel:**\n```s195469```")
 			fmt.Println("Matching studentID:", err)
 			return
 		}
-		fmt.Println(m.Author.Username,"wrote:",m.Content)
-		if register{
-			registerStudent(s,m,c)
+		fmt.Println(m.Author.Username, "wrote:", m.Content)
+		if register {
+			registerStudent(s, m, c)
 			return
 		}
 	}
 
 	//Logs that registered user writes message
-	fmt.Println("Registerd user:",author.FirstName,"wrote", m.Content, "in Channel(", "\""+c.Name+"\"",")")
+	fmt.Println("Registerd user:", author.FirstName, "wrote", m.Content, "in Channel(", "\""+c.Name+"\"", ")")
 	fmt.Println("His ID:", author.Discord)
 
-	if author.Role == "TA"{
-		del, _ := regexp.MatchString(`##s\d{6}`,m.Content)
+	if author.Role == "TA" {
+		del, _ := regexp.MatchString(`##s\d{6}`, m.Content)
 		if del {
 			fmt.Println("Deleting user", m.Content)
-			unRegisterStudent(s,m,c)
+			unRegisterStudent(s, m, c)
 		}
 
 	}
