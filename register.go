@@ -44,7 +44,7 @@ func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discor
 
 func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel) {
 
-	str := strings.Trim(strings.ToLower(m.Content), "##")
+	str := strings.Trim(strings.Trim(strings.ToLower(m.Content), "delete("),")")
 	stud, err := findStudent(str, false)
 	if err != nil {
 		fmt.Println("looking for student", str, ":", err)
