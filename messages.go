@@ -18,6 +18,14 @@ func deleteMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+	fmt.Println("Channel:", m.ChannelID)
+
+	//Only works in channel registrering
+	if m.ChannelID != "749103315597394020" {
+		return
+	}
+	go deleteMessage(s, m)
+
 	//Exclude messages from web bot
 	if m.Author.ID == "748621295092105336" {
 		return
@@ -26,13 +34,6 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
-
-	fmt.Println("Channel:", m.ChannelID)
-	//Only works in channel registrering
-	if m.ChannelID != "749103315597394020" {
-		return
-	}
-	go deleteMessage(s, m)
 
 	//Identify channel
 	c, err := s.State.Channel(m.ChannelID)
@@ -48,7 +49,6 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		//Register member
 		register, err := regexp.MatchString(`s\d{6}`, strings.ToLower(m.Content))
 		if err != nil {
-			s.ChannelMessageSend(c.ID, "Velkommen "+m.Author.Username+", Vil du venligst identificere dig selv med dit studienummer.\n**Eksempel:**\n```s195469```")
 			fmt.Println("Matching studentID:", err)
 			return
 		}
@@ -57,6 +57,8 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			registerStudent(s, m, c)
 			return
 		}
+		s.ChannelMessageSend(c.ID, "Velkommen "+m.Author.Username+", Vil du venligst identificere dig selv med dit studienummer.\n**Eksempel:**\n```s195469```")
+		return
 	}
 
 	//Logs that registered user writes message
