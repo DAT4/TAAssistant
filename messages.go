@@ -66,7 +66,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	fmt.Println("His ID:", author.Discord)
 
 	if author.Role == "TA" {
-		del, _ := regexp.MatchString(`##s\d{6}`, m.Content)
+		del, _ := regexp.MatchString(`##s\d{6}`, strings.ToLower(m.Content))
 		if del {
 			fmt.Println("Deleting user", m.Content)
 			unRegisterStudent(s, m, c)

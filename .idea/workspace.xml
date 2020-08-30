@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8127339f-888b-4b84-b823-5db4f29dda67" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TAAssistant" beforeDir="false" afterPath="$PROJECT_DIR$/TAAssistant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages.go" beforeDir="false" afterPath="$PROJECT_DIR$/messages.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
