@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel) {
+func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel, channel Channel) {
 	str := strings.Trim(strings.ToLower(m.Content), "%")
 	person, err := findStudent(str, false)
 	if err != nil {
@@ -14,7 +14,7 @@ func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discor
 		return
 	}
 
-	if person.Discord != "" {
+	if person.Discord != "" && person.Discord != m.Author.ID {
 		user, err := s.User(person.Discord)
 		if err != nil {
 			fmt.Println("Looking for user in Guild:", err)
@@ -24,16 +24,16 @@ func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discor
 	}
 
 	s.ChannelMessageSend(c.ID, "```Hejsa "+person.fullName()+"\nDu registreres og får nu adgang til diverse tekst og talekanaler!```")
-	updateStudent(str, m.Author.ID)
+	updateStudent(str, m.Author.ID, channel.ID, channel.I, true)
 
 	// Changing name and adding student to Student role
 	if person.Role == "S" {
-		err = s.GuildMemberNickname(m.GuildID, m.Author.ID, person.FirstName+" - "+person.ID)
+		err = s.GuildMemberNickname(m.GuildID, m.Author.ID, person.FirstName+" "+person.LastName+" - "+person.ID)
 		if err != nil {
 			fmt.Println("Changing", m.Author.Username, "'s nickname:", err)
 			return
 		}
-		err = s.GuildMemberRoleAdd(m.GuildID, m.Author.ID, "748524096358318081")
+		err = s.GuildMemberRoleAdd(m.GuildID, m.Author.ID, channel.RoleID)
 		if err != nil {
 			fmt.Println("Adding", m.Author.Username, "to role Student:", err)
 			return
@@ -42,9 +42,10 @@ func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discor
 	return
 }
 
-func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel) {
+func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel, channel Channel) {
 
 	str := strings.Trim(strings.Trim(strings.ToLower(m.Content), "delete("),")")
+	fmt.Println(str)
 	stud, err := findStudent(str, false)
 	if err != nil {
 		fmt.Println("looking for student", str, ":", err)
@@ -53,6 +54,7 @@ func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *disc
 	user, err := s.User(stud.Discord)
 	if err != nil {
 		fmt.Println("Looking for user in Guild:", err)
+		return
 	}
 	err = s.GuildMemberNickname(m.GuildID, user.ID, user.Username)
 	if err != nil {
@@ -60,7 +62,7 @@ func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *disc
 		return
 	}
 
-	err = s.GuildMemberRoleRemove(m.GuildID, stud.Discord, "748524096358318081")
+	err = s.GuildMemberRoleRemove(m.GuildID, stud.Discord, channel.RoleID)
 	if err != nil {
 		fmt.Println("Removing", user.Username, "from role Student:", err)
 		return
@@ -69,7 +71,7 @@ func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *disc
 
 	//Connectiong to MongoDB to Update
 	fmt.Println(str, "slettes.")
-	err = updateStudent(str, "")
+	err = updateStudent(str, "", channel.ID, channel.I, false)
 	if err != nil {
 		fmt.Println("Deleting student", str, ":", err)
 	}
