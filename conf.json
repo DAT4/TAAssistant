@@ -1,0 +1,11 @@
+{
+  "token": "NzMwNTM2MTE0MzE3Njg4ODQy.XwY6xg.BUCgLNKB_Du0MBTHQ7YbrglR9qY",
+  "botStatus": "Tower of Hanoi",
+  "regChan": "registrering",
+  "studRole": "Student",
+  "mongo" : {
+    "uri": "mongodb+srv://martin:newpdk1234@cluster0.1a9yf.mongodb.net",
+    "db": "dtu",
+    "col": "indpro"
+  }
+}

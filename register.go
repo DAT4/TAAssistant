@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel, channel Channel) {
+func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel, studRole string) {
 	str := strings.Trim(strings.ToLower(m.Content), "%")
 	person, err := findStudent(str, false)
 	if err != nil {
@@ -24,7 +24,7 @@ func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discor
 	}
 
 	s.ChannelMessageSend(c.ID, "```Hejsa "+person.fullName()+"\nDu registreres og får nu adgang til diverse tekst og talekanaler!```")
-	updateStudent(str, m.Author.ID, channel.ID, channel.I, true)
+	updateStudent(str, m.Author.ID)
 
 	// Changing name and adding student to Student role
 	if person.Role == "S" {
@@ -33,7 +33,7 @@ func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discor
 			fmt.Println("Changing", m.Author.Username, "'s nickname:", err)
 			return
 		}
-		err = s.GuildMemberRoleAdd(m.GuildID, m.Author.ID, channel.RoleID)
+		err = s.GuildMemberRoleAdd(m.GuildID, m.Author.ID, studRole)
 		if err != nil {
 			fmt.Println("Adding", m.Author.Username, "to role Student:", err)
 			return
@@ -42,7 +42,7 @@ func registerStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discor
 	return
 }
 
-func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel, channel Channel) {
+func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel, studRole string) {
 
 	str := strings.Trim(strings.Trim(strings.ToLower(m.Content), "delete("),")")
 	fmt.Println(str)
@@ -62,7 +62,7 @@ func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *disc
 		return
 	}
 
-	err = s.GuildMemberRoleRemove(m.GuildID, stud.Discord, channel.RoleID)
+	err = s.GuildMemberRoleRemove(m.GuildID, stud.Discord, studRole)
 	if err != nil {
 		fmt.Println("Removing", user.Username, "from role Student:", err)
 		return
@@ -71,7 +71,7 @@ func unRegisterStudent(s *discordgo.Session, m *discordgo.MessageCreate, c *disc
 
 	//Connectiong to MongoDB to Update
 	fmt.Println(str, "slettes.")
-	err = updateStudent(str, "", channel.ID, channel.I, false)
+	err = updateStudent(str, "")
 	if err != nil {
 		fmt.Println("Deleting student", str, ":", err)
 	}

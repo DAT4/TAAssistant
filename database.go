@@ -6,16 +6,12 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"os"
-	"strconv"
 	"time"
 )
 
-var mongURI = os.Getenv("MONGO_URI")
-
-func updateStudent(id string, discordID string, channelID string, i int , status bool) (err error) {
+func updateStudent(id string, discordID string) (err error) {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongURI))
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(conf.Mongo.Uri))
 
 	if err != nil {
 		return err
@@ -23,15 +19,12 @@ func updateStudent(id string, discordID string, channelID string, i int , status
 
 	defer client.Disconnect(ctx)
 
-	database := client.Database("dtu")
-	students := database.Collection("studenter")
+	database := client.Database(conf.Mongo.Db)
+	students := database.Collection(conf.Mongo.Col)
 	_, err = students.UpdateOne(ctx,
 		bson.M{"ID": id},
 		bson.D{
-			{"$set", bson.M{
-				"DiscordID": discordID,
-				"Courses."+strconv.Itoa(i)+".OnDiscord": status,
-			}},
+			{"$set", bson.M{"DiscordID": discordID}},
 		},
 	)
 	if err != nil {
@@ -42,7 +35,7 @@ func updateStudent(id string, discordID string, channelID string, i int , status
 }
 func findStudent(id string, discord bool) (student *student, err error) {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongURI))
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(conf.Mongo.Uri))
 	if err != nil {
 		fmt.Println("Could not connect to client:", err)
 		return nil, err
@@ -50,7 +43,7 @@ func findStudent(id string, discord bool) (student *student, err error) {
 
 	defer client.Disconnect(ctx)
 
-	students := client.Database("dtu").Collection("studenter")
+	students := client.Database(conf.Mongo.Db).Collection(conf.Mongo.Col)
 	//questions := *database.Collection("questions")
 
 	if discord {

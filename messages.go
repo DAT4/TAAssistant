@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"regexp"
@@ -19,25 +20,20 @@ func deleteMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	fmt.Println("Channel:", m.ChannelID)
-	var channel Channel
 
 	//Only works in channel registrering
-	if m.ChannelID == "749103315597394020" {
+	regChan, err := getChannel(s,m,conf.RegChan)
+	if err != nil {
+		fmt.Println("Looking for channel Registration:", err)
+	}
+	if m.ChannelID == regChan.ID {
 		// Indledende programmering
-		channel = Channel{0,"20312/14","748524096358318081"}
-	} else if m.ChannelID == "747753347238330389"{
-		// Udviklingsmetoder (UML)
-		channel = Channel{1,"62531","748534855712899242"}
 	} else {
 		return
 	}
 
 	go deleteMessage(s, m)
 
-	//Exclude messages from web bot
-	if m.Author.ID == "748621295092105336" {
-		return
-	}
 	//Exclude messages from client
 	if m.Author.ID == s.State.User.ID {
 		return
@@ -51,16 +47,26 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	//Identify author
 	author, err := findStudent(m.Author.ID, true)
+	studRole, err := getRole(s,m,conf.StudRole)
 	if err != nil {
-		fmt.Println("Trying to identify user", err)
-		startRegistration(s,m,c,channel)
+		fmt.Println("Looking for role Student:", err)
 		return
 	}
-	for _, e := range(author.Courses){
-		if e.OnDiscord == false && e.ID == channel.ID{
-			startRegistration(s,m,c,channel)
+	if err != nil {
+		fmt.Println("Trying to identify user", err)
+		//Register member
+		register, err := regexp.MatchString(`s\d{6}`, strings.ToLower(m.Content))
+		if err != nil {
+			fmt.Println("Matching studentID:", err)
 			return
 		}
+		fmt.Println(m.Author.Username, "wrote:", m.Content)
+		if register {
+			registerStudent(s, m, c, studRole)
+			return
+		}
+		s.ChannelMessageSend(c.ID, "Velkommen "+m.Author.Username+", Vil du venligst identificere dig selv med dit studienummer.\n**Eksempel:**\n```s195469```")
+		return
 	}
 
 	//Logs that registered user writes message
@@ -71,7 +77,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		del, _ := regexp.MatchString(`delete\(s\d{6}\)`, strings.ToLower(m.Content))
 		if del {
 			fmt.Println("Deleting user", m.Content, "with ID:", del)
-			unRegisterStudent(s, m, c, channel)
+			unRegisterStudent(s, m, c, studRole)
 		}
 		return
 	}
@@ -79,18 +85,30 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	return
 }
 
-func startRegistration(s *discordgo.Session, m *discordgo.MessageCreate, c *discordgo.Channel, channel Channel){
-	//Register member
-	register, err := regexp.MatchString(`s\d{6}`, strings.ToLower(m.Content))
+func getRole(s *discordgo.Session, m *discordgo.MessageCreate, prefix string) (roleID string, err error) {
+	roles, err := s.GuildRoles(m.GuildID)
 	if err != nil {
-		fmt.Println("Matching studentID:", err)
-		return
+		return "", err
 	}
-	fmt.Println(m.Author.Username, "wrote:", m.Content)
-	if register {
-		registerStudent(s, m, c, channel)
-		return
+	for _, e := range roles {
+		if strings.HasPrefix(e.Name, prefix) {
+			fmt.Println("Role permission", e.Permissions)
+			return e.ID, nil
+		}
 	}
-	s.ChannelMessageSend(c.ID, "Velkommen "+m.Author.Username+", Vil du venligst identificere dig selv med dit studienummer.\n**Eksempel:**\n```s195469```")
-	return
+	return "", errors.New("Something went wrong...")
 }
+
+func getChannel(s *discordgo.Session, m *discordgo.MessageCreate, prefix string) (*discordgo.Channel, error) {
+	channels, err := s.GuildChannels(m.GuildID)
+	if err != nil {
+		return nil, err
+	}
+	for _, e := range channels {
+		if strings.HasPrefix(e.Name, prefix) {
+			return e, nil
+		}
+	}
+	return nil, errors.New("No channel with that name.")
+}
+

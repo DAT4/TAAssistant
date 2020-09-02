@@ -1,21 +1,40 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/bwmarrin/discordgo"
+	"io/ioutil"
 	"os"
 	"os/signal"
 	"syscall"
 )
 
-var token = os.Getenv("DISCORD_TOKEN")
+var conf Conf
 
 func main() {
+	err := configuration()
+	if err != nil {
+		fmt.Println("Loading configuration file:",err)
+		return
+	}
 	discordConnect()
 }
 
+func configuration() error{
+	byteValue, err := ioutil.ReadFile("conf.json")
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(byteValue,&conf)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func discordConnect() {
-	discord, err := discordgo.New("Bot " + token)
+	discord, err := discordgo.New("Bot " + conf.Token)
 	if err != nil {
 		fmt.Println("Connect to the bot", err)
 		return
@@ -34,6 +53,6 @@ func discordConnect() {
 	discord.Close()
 }
 
-func ready(s *discordgo.Session, even *discordgo.Ready) {
-	s.UpdateStatus(0, "Tower of Hanoi")
+func ready(s *discordgo.Session, even *discordgo.Event) {
+	s.UpdateStatus(0, conf.BotStatus)
 }
