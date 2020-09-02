@@ -53,3 +53,40 @@ ExecStart=/dir/to/TAAssistant -c /dir/to/conf.json
 [Install]
 WantedBy=multi-user.target
 ```
+
+First refresh the systemd daemon
+```bash
+# systemctl daemon-reload
+```
+
+Then you can try to start your service
+```bash
+# systemctl start TAAssistant.service
+```
+
+Check if the service is running
+```bash
+# systemctl status TAAssistant.service
+```
+
+If everything is OK then enable the service to let it run on startup
+```bash
+# systemctl enable TAAssistant.service
+```
+
+If there is a problem then you can use 
+
+
+```bash
+# journalclt -xeu TAAssistant.service -o cat
+```
+
+To see the log and look for possible errors.
+
+If you want to follow the logs while the program is running then use journalctl
+
+```bash
+# journalclt -fu TAAssistant.service -o cat
+```
+
+
