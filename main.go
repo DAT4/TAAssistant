@@ -15,18 +15,18 @@ var conf Conf
 func main() {
 	err := configuration()
 	if err != nil {
-		fmt.Println("Loading configuration file:",err)
+		fmt.Println("Loading configuration file:", err)
 		return
 	}
 	discordConnect()
 }
 
-func configuration() error{
+func configuration() error {
 	byteValue, err := ioutil.ReadFile("conf.json")
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal(byteValue,&conf)
+	err = json.Unmarshal(byteValue, &conf)
 	if err != nil {
 		return err
 	}

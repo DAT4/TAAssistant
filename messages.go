@@ -22,7 +22,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	fmt.Println("Channel:", m.ChannelID)
 
 	//Only works in channel registrering
-	regChan, err := getChannel(s,m,conf.RegChan)
+	regChan, err := getChannel(s, m, conf.RegChan)
 	if err != nil {
 		fmt.Println("Looking for channel Registration:", err)
 	}
@@ -47,7 +47,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	//Identify author
 	author, err := findStudent(m.Author.ID, true)
-	studRole, err := getRole(s,m,conf.StudRole)
+	studRole, err := getRole(s, m, conf.StudRole)
 	if err != nil {
 		fmt.Println("Looking for role Student:", err)
 		return
@@ -81,7 +81,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 		return
 	}
-	s.ChannelMessageSend(c.ID, "```"+author.FirstName +" du er allerede registreret, med ID: "+author.ID+"```")
+	s.ChannelMessageSend(c.ID, "```"+author.FirstName+" du er allerede registreret, med ID: "+author.ID+"```")
 	return
 }
 
@@ -111,4 +111,3 @@ func getChannel(s *discordgo.Session, m *discordgo.MessageCreate, prefix string)
 	}
 	return nil, errors.New("No channel with that name.")
 }
-
