@@ -23,13 +23,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8127339f-888b-4b84-b823-5db4f29dda67" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/conf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TAAssistant" beforeDir="false" afterPath="$PROJECT_DIR$/TAAssistant" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/conf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/messages.go" beforeDir="false" afterPath="$PROJECT_DIR$/messages.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/models.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.go" beforeDir="false" afterPath="$PROJECT_DIR$/register.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +105,7 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="655" y="304" width="599" height="387" key="#com.intellij.fileTypes.FileTypeChooser/277.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598554174351" />
-    <state width="1814" height="150" key="GridCell.Tab.0.bottom" timestamp="1599079632547">
+    <state width="1814" height="150" key="GridCell.Tab.0.bottom" timestamp="1599082597860">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1260" height="181" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1598825876245" />
@@ -118,8 +116,8 @@
     <state width="1814" height="150" key="GridCell.Tab.0.bottom/324.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598895291632" />
     <state width="1260" height="150" key="GridCell.Tab.0.bottom/324.1080.1366.768/0.0.1920.1080@324.1080.1366.768" timestamp="1598886188130" />
     <state width="1814" height="142" key="GridCell.Tab.0.bottom/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598545944138" />
-    <state width="1814" height="150" key="GridCell.Tab.0.bottom/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599079632547" />
-    <state width="1814" height="150" key="GridCell.Tab.0.center" timestamp="1599079632546">
+    <state width="1814" height="150" key="GridCell.Tab.0.bottom/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599082597860" />
+    <state width="1814" height="150" key="GridCell.Tab.0.center" timestamp="1599082597860">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1260" height="181" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1598825876245" />
@@ -130,8 +128,8 @@
     <state width="1814" height="150" key="GridCell.Tab.0.center/324.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598895291632" />
     <state width="1260" height="150" key="GridCell.Tab.0.center/324.1080.1366.768/0.0.1920.1080@324.1080.1366.768" timestamp="1598886188130" />
     <state width="1814" height="142" key="GridCell.Tab.0.center/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598545944138" />
-    <state width="1814" height="150" key="GridCell.Tab.0.center/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599079632546" />
-    <state width="1814" height="150" key="GridCell.Tab.0.left" timestamp="1599079632546">
+    <state width="1814" height="150" key="GridCell.Tab.0.center/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599082597860" />
+    <state width="1814" height="150" key="GridCell.Tab.0.left" timestamp="1599082597860">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1260" height="181" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1598825876245" />
@@ -142,8 +140,8 @@
     <state width="1814" height="150" key="GridCell.Tab.0.left/324.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598895291632" />
     <state width="1260" height="150" key="GridCell.Tab.0.left/324.1080.1366.768/0.0.1920.1080@324.1080.1366.768" timestamp="1598886188130" />
     <state width="1814" height="142" key="GridCell.Tab.0.left/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598545944138" />
-    <state width="1814" height="150" key="GridCell.Tab.0.left/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599079632546" />
-    <state width="1814" height="150" key="GridCell.Tab.0.right" timestamp="1599079632547">
+    <state width="1814" height="150" key="GridCell.Tab.0.left/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599082597860" />
+    <state width="1814" height="150" key="GridCell.Tab.0.right" timestamp="1599082597860">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1260" height="181" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1598825876245" />
@@ -154,12 +152,12 @@
     <state width="1814" height="150" key="GridCell.Tab.0.right/324.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598895291632" />
     <state width="1260" height="150" key="GridCell.Tab.0.right/324.1080.1366.768/0.0.1920.1080@324.1080.1366.768" timestamp="1598886188130" />
     <state width="1814" height="142" key="GridCell.Tab.0.right/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598545944138" />
-    <state width="1814" height="150" key="GridCell.Tab.0.right/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599079632547" />
+    <state width="1814" height="150" key="GridCell.Tab.0.right/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599082597860" />
     <state x="178" y="-16" key="SettingsEditor" timestamp="1598670981977">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="178" y="-16" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1598670981977" />
-    <state x="204" y="-293" width="508" height="623" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1599079311743">
+    <state x="204" y="-347" width="508" height="623" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1599081967735">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="145" y="9" width="508" height="623" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.768@0.0.1366.768" timestamp="1598679787371" />
@@ -167,7 +165,7 @@
     <state x="0" y="-402" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/277.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598556141456" />
     <state x="204" y="-23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/324.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598885392368" />
     <state x="0" y="-384" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/339.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1598536165333" />
-    <state x="204" y="-293" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599079311743" />
+    <state x="204" y="-347" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/554.1080.1366.768/0.0.1920.1080/1920.474.1440.900@0.0.1920.1080" timestamp="1599081967735" />
     <state x="793" y="294" width="323" height="475" key="refactoring.ChangeSignatureDialog" timestamp="1598460783971">
       <screen x="0" y="312" width="1366" height="768" />
     </state>

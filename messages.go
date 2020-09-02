@@ -46,12 +46,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	//Identify author
-	author, err := findStudent(m.Author.ID, true)
 	studRole, err := getRole(s, m, conf.StudRole)
 	if err != nil {
 		fmt.Println("Looking for role Student:", err)
 		return
 	}
+	author, err := findStudent(m.Author.ID, true)
 	if err != nil {
 		fmt.Println("Trying to identify user", err)
 		//Register member

@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"io/ioutil"
@@ -13,7 +14,11 @@ import (
 var conf Conf
 
 func main() {
-	err := configuration()
+	var filePath string
+	flag.StringVar(&filePath, "c", "conf.json", "The path for the config file")
+	flag.Parse()
+	fmt.Println("TAAssistant is Running!")
+	err := configuration(filePath)
 	if err != nil {
 		fmt.Println("Loading configuration file:", err)
 		return
@@ -21,8 +26,8 @@ func main() {
 	discordConnect()
 }
 
-func configuration() error {
-	byteValue, err := ioutil.ReadFile("conf.json")
+func configuration(path string) error {
+	byteValue, err := ioutil.ReadFile(path)
 	if err != nil {
 		return err
 	}
